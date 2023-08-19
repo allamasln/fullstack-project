@@ -1,0 +1,5 @@
+{
+	"env": "NODE_ENV",
+	"jwtSecret": "JWT_SECRET",
+	"db": "MONGO_URI"
+}

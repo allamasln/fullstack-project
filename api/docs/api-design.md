@@ -54,10 +54,10 @@ GET /api/countries {public}
 
 GET /api/countries?region=africa {public}
 GET /api/countries?search=bel {public}
-GET /api/countries?page=2 {public}
+GET /api/countries?limit=20&offset=20 {public}
 `[QUERY] region`
 `[QUERY] search`
-`[QUERY] page`
+`[QUERY] limit, offset`
 
 GET /api/countries/:countryId {public}
 `[PARAM] countryid`
