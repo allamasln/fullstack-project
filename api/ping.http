@@ -1,1 +1,5 @@
 GET http://localhost:4040/ping
+
+###
+
+GET https://api-countries-q00b.onrender.com/ping
