@@ -2,6 +2,7 @@ const mongoose = require('mongoose')
 const config = require('config')
 const jwt = require('jsonwebtoken')
 const { pick } = require('lodash')
+const { body } = require('express-validator')
 
 const userSchema = new mongoose.Schema({
 	username: { type: String, required: true, unique: true },
@@ -16,6 +17,14 @@ userSchema.methods.generateJWT = function () {
 	)
 }
 
+const userValidationSchema = [
+	body('username')
+		.notEmpty()
+		.withMessage('El nombre de usuario no puede estar vacío'),
+	body('password').notEmpty().withMessage('La password no puede estar vacía'),
+]
+
 const User = mongoose.model('User', userSchema)
 
 exports.User = User
+exports.userValidationSchema = userValidationSchema

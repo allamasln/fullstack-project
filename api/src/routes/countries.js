@@ -1,13 +1,41 @@
 const { Router } = require('express')
 
 const countryController = require('../controllers/countries')
+const { upload } = require('../models/country')
+
+const { countryValidationSchema } = require('../models/country')
+const validateParamId = require('../utils/validateParamId')
+const validate = require('../middlewares/validate')
 
 const router = Router()
 
 router.get('/', countryController.getAll)
-router.get('/:countryId', countryController.getOne)
-router.post('/', countryController.create)
-router.put('/:countryId', countryController.update)
-router.delete('/:countryId', countryController.deleteOne)
+router.get(
+	'/:countryId',
+	validateParamId('countryId'),
+	validate,
+	countryController.getOne
+)
+router.post(
+	'/',
+	upload.single('flag'),
+	countryValidationSchema,
+	validate,
+	countryController.create
+)
+router.put(
+	'/:countryId',
+	validateParamId('countryId'),
+	upload.single('flag'),
+	countryValidationSchema,
+	validate,
+	countryController.update
+)
+router.delete(
+	'/:countryId',
+	validateParamId('countryId'),
+	validate,
+	countryController.deleteOne
+)
 
 module.exports = router

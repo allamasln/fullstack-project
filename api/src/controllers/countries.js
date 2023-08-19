@@ -1,23 +1,64 @@
+const cloudinary = require('../utils/cloudinary')
+
 const { Country } = require('../models/country')
 
 const getAll = async (req, res) => {
-	res.send('getAll')
+	let { region, search, limit = 1000, offset = 0 } = req.query
+
+	let filter = {}
+
+	if (search) filter.name = { $regex: '.*' + search + '.*' }
+	if (region) filter.region = region
+
+	console.log(filter)
+
+	const countries = await Country.find(filter).limit(limit).skip(offset)
+
+	res.json(countries)
 }
 
 const getOne = async (req, res) => {
-	res.send('getOne')
+	const country = await Country.findById(req.params.countryId)
+
+	res.json(country)
 }
 
 const create = async (req, res) => {
-	res.send('create')
+	const { path: flag, filename: flagCloudinaryId } = req.file
+
+	const newCountry = await Country.create({
+		...req.body,
+		flag,
+		flagCloudinaryId,
+	})
+
+	res.json(newCountry)
 }
 
 const update = async (req, res) => {
-	res.send('update')
+	const { path: flag, filename: flagCloudinaryId } = req.file
+	const { countryId } = req.params
+
+	const updates = { ...req.body, flag, flagCloudinaryId }
+
+	const oldCountry = await Country.findByIdAndUpdate(countryId, updates)
+	const updatedCountry = { countryId, ...updates }
+
+	await cloudinary.uploader.destroy(oldCountry.flagCloudinaryId, {
+		invalidate: true,
+	})
+
+	res.json(updatedCountry)
 }
 
 const deleteOne = async (req, res) => {
-	res.send('deleteOne')
+	const deletedCountry = await Country.findByIdAndDelete(req.params.countryId)
+
+	await cloudinary.uploader.destroy(deletedCountry.flagCloudinaryId, {
+		invalidate: true,
+	})
+
+	res.json(deletedCountry)
 }
 
 module.exports = { getAll, getOne, create, update, deleteOne }

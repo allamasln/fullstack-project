@@ -51,7 +51,6 @@ POST /api/users/signin {public}
 `[BODY] username, password`
 
 GET /api/countries {public}
-
 GET /api/countries?region=africa {public}
 GET /api/countries?search=bel {public}
 GET /api/countries?limit=20&offset=20 {public}
