@@ -10,4 +10,4 @@ GET http://localhost:4040/api/countries
 
 ###
 
-GET https://api-countries-q00b.onrender.com/countries
+GET https://api-countries-q00b.onrender.com/api/countries
