@@ -1,6 +1,8 @@
+require('express-async-errors')
 const { json } = require('express')
-
 const morgan = require('morgan')
+
+const errors = require('../middlewares/errors')
 
 module.exports = function (app) {
 	app.use(json())
@@ -12,4 +14,6 @@ module.exports = function (app) {
 	app.get('/ping', (req, res) => {
 		res.json({ status: 'success' })
 	})
+
+	app.use(errors)
 }

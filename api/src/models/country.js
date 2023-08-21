@@ -27,7 +27,21 @@ const FLAG_TYPES = {
 const validateFlag = (type) => FLAG_TYPES[type]
 
 const countryValidationSchema = [
-	body('name').notEmpty().withMessage('El nombre es obligatorio'),
+	body('name')
+		.notEmpty()
+		.withMessage('El nombre es obligatorio')
+		.custom(async (name, { req }) => {
+			const filter = { name }
+
+			// path: PUT /countries/:countryId
+			if (req.params.countryId) {
+				console.log('eee')
+				filter['_id'] = { $ne: req.params.countryId }
+			}
+
+			const country = await Country.findOne(filter)
+			if (country) throw new Error('Ya hay un país con ese nombre')
+		}),
 	body('population')
 		.isNumeric()
 		.withMessage('La población debe ser un número')

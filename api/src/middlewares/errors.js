@@ -1,9 +1,7 @@
-const winston = require('winston')
-
 module.exports = function (err, req, res, next) {
-	// Aquí lógica para errores 500
+	console.log('[500]', err)
 
-	winston.error('[500]', err)
-
-	res.status(500).send('Estamos trabajando para volver lo antes posible.')
+	res
+		.status(500)
+		.json({ message: 'Estamos trabajando para volver lo antes posible.' })
 }

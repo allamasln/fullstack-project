@@ -20,6 +20,8 @@ const getAll = async (req, res) => {
 const getOne = async (req, res) => {
 	const country = await Country.findById(req.params.countryId)
 
+	if (!country) return res.status(404).json({ message: 'País no encontrado' })
+
 	res.json(country)
 }
 
@@ -40,8 +42,10 @@ const update = async (req, res) => {
 	const { countryId } = req.params
 
 	const updates = { ...req.body, flag, flagCloudinaryId }
-
 	const oldCountry = await Country.findByIdAndUpdate(countryId, updates)
+
+	if (!oldCountry)
+		return res.status(404).json({ message: 'País no encontrado' })
 	const updatedCountry = { countryId, ...updates }
 
 	await cloudinary.uploader.destroy(oldCountry.flagCloudinaryId, {
@@ -53,6 +57,9 @@ const update = async (req, res) => {
 
 const deleteOne = async (req, res) => {
 	const deletedCountry = await Country.findByIdAndDelete(req.params.countryId)
+
+	if (!deletedCountry)
+		return res.status(404).json({ message: 'País no encontrado' })
 
 	await cloudinary.uploader.destroy(deletedCountry.flagCloudinaryId, {
 		invalidate: true,

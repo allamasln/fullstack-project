@@ -17,14 +17,14 @@ userSchema.methods.generateJWT = function () {
 	)
 }
 
+const User = mongoose.model('User', userSchema)
+
 const userValidationSchema = [
 	body('username')
 		.notEmpty()
 		.withMessage('El nombre de usuario no puede estar vacío'),
 	body('password').notEmpty().withMessage('La password no puede estar vacía'),
 ]
-
-const User = mongoose.model('User', userSchema)
 
 exports.User = User
 exports.userValidationSchema = userValidationSchema
