@@ -8,6 +8,9 @@ const { countryValidationSchema } = require('../models/country')
 const validateParamId = require('../utils/validateParamId')
 const validate = require('../middlewares/validate')
 
+const auth = require('../middlewares/auth')
+const admin = require('../middlewares/admin')
+
 const router = Router()
 
 router.get(
@@ -28,6 +31,7 @@ router.get(
 )
 router.post(
 	'/',
+	[auth],
 	upload.single('flag'),
 	countryValidationSchema,
 	validate,
@@ -36,6 +40,7 @@ router.post(
 
 router.put(
 	'/:countryId',
+	[auth],
 	validateParamId('countryId'),
 	upload.single('flag'),
 	countryValidationSchema,
@@ -44,6 +49,7 @@ router.put(
 )
 router.delete(
 	'/:countryId',
+	[auth, admin],
 	validateParamId('countryId'),
 	validate,
 	countryController.deleteOne
