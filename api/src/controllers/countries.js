@@ -10,8 +10,6 @@ const getAll = async (req, res) => {
 	if (search) filter.name = { $regex: '.*' + search + '.*' }
 	if (region) filter.region = region
 
-	console.log(filter)
-
 	const countries = await Country.find(filter).limit(limit).skip(offset)
 
 	res.json(countries)
