@@ -16,7 +16,10 @@ const getAll = async (req, res) => {
 }
 
 const getOne = async (req, res) => {
-	const country = await Country.findById(req.params.countryId)
+	const country = await Country.findById(req.params.countryId).populate({
+		path: 'borders',
+		select: 'name _id',
+	})
 
 	if (!country) return res.status(404).json({ message: 'País no encontrado' })
 

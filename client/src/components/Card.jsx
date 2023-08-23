@@ -5,7 +5,11 @@ import {
 	Image,
 	Stack,
 	Heading,
+	LinkBox,
+	LinkOverlay,
 } from '@chakra-ui/react'
+
+import { Link } from 'react-router-dom'
 
 import styled from '@emotion/styled'
 
@@ -21,20 +25,24 @@ const Title = styled(Heading)`
 	line-height: 26px;
 `
 
-function Card({ title, image, children }) {
+function Card({ title, image, itemId, children }) {
 	return (
-		<ChakraCard>
-			<CardHeader p={0}>
-				<StyledImage src={image} />
-			</CardHeader>
-			<CardBody p="24px 24px 46px">
-				<Stack spacing="16px">
-					<Title as="h3">{title}</Title>
+		<LinkBox as={ChakraCard}>
+			<ChakraCard>
+				<CardHeader p={0}>
+					<StyledImage src={image} />
+				</CardHeader>
+				<CardBody p="24px 24px 46px">
+					<Stack spacing="16px">
+						<LinkOverlay as={Link} to={'/country/' + itemId}>
+							<Title as="h3">{title}</Title>
+						</LinkOverlay>
 
-					{children}
-				</Stack>
-			</CardBody>
-		</ChakraCard>
+						{children}
+					</Stack>
+				</CardBody>
+			</ChakraCard>
+		</LinkBox>
 	)
 }
 export default Card
