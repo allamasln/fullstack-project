@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { getCountryList } from '../services/countryService'
 
 import { SimpleGrid, List } from '@chakra-ui/react'
@@ -6,7 +6,11 @@ import { SimpleGrid, List } from '@chakra-ui/react'
 import { Card, ListItem } from '../components'
 
 function HomePage() {
-	const [countries, setCountries] = useState(getCountryList())
+	const [countries, setCountries] = useState([])
+
+	useEffect(() => {
+		getCountryList().then(setCountries)
+	}, [])
 
 	return (
 		<SimpleGrid

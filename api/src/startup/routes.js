@@ -2,6 +2,8 @@ require('express-async-errors')
 const { json } = require('express')
 const morgan = require('morgan')
 
+const cors = require('cors')
+
 const helmet = require('helmet')
 const compression = require('compression')
 
@@ -11,6 +13,7 @@ module.exports = function (app) {
 	app.use(helmet())
 	app.use(compression())
 
+	app.use(cors())
 	app.use(json())
 	app.use(morgan('tiny'))
 
