@@ -16,6 +16,7 @@ const styles = {
 		body: {
 			color: 'var(--text)',
 			bg: 'var(--background)',
+			paddingBottom: '6rem',
 		},
 	}),
 }

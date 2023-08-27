@@ -16,22 +16,14 @@ const router = Router()
 router.get(
 	'/',
 	query('limit').isNumeric().withMessage('Limit debe ser un número').optional(),
-	query('offset')
-		.isNumeric()
-		.withMessage('Offset debe ser un número')
-		.optional(),
+	query('offset').isNumeric().withMessage('Offset debe ser un número').optional(),
 	validate,
 	countryController.getAll
 )
-router.get(
-	'/:countryId',
-	validateParamId('countryId'),
-	validate,
-	countryController.getOne
-)
+router.get('/:countryId', validateParamId('countryId'), validate, countryController.getOne)
 router.post(
 	'/',
-	[auth],
+
 	upload.single('flag'),
 	countryValidationSchema,
 	validate,

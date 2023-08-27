@@ -7,9 +7,9 @@ import {
 	useDisclosure,
 } from '@chakra-ui/react'
 
-import ColorModeToggleButton from './ColorModeToggleButton'
-import MenuToggleButton from './MenuToggleButton'
-import { HorizontalMenu, VerticalMenu } from './Menu'
+import ColorModeToggleButton from './colormode-toggle'
+import MenuToggleButton from './menu-toogle'
+import { HorizontalMenu, VerticalMenu } from './menu'
 import Brand from './Brand'
 
 function Navbar() {

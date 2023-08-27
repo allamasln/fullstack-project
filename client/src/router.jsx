@@ -4,8 +4,8 @@ import Layout from './layout/Layout'
 import ErrorPage from './pages/ErrorPage'
 import HomePage from './pages/HomePage'
 import DetailPage from './pages/DetailPage'
-// import NewCountryPage from './pages/NewCountryPage'
-// import UpdateCountryPage from './pages/UpdateCountryPage'
+import NewCountryPage from './pages/NewCountryPage'
+import UpdateCountryPage from './pages/UpdateCountryPage'
 // import DeleteCountryPage from './pages/DeleteCountryPage'
 import LoginPage from './pages/LoginPage'
 import RegisterPage from './pages/RegisterPage'
@@ -21,18 +21,18 @@ const router = createBrowserRouter([
 				path: '/',
 				element: <HomePage />,
 			},
-			// {
-			// 	path: '/country/new',
-			// 	element: <NewCountryPage />,
-			// },
+			{
+				path: '/country/new',
+				element: <NewCountryPage />,
+			},
 			{
 				path: '/country/:countryId',
 				element: <DetailPage />,
 			},
-			// {
-			// 	path: '/country/:countryId/update',
-			// 	element: <UpdateCountryPage />,
-			// },
+			{
+				path: '/country/:countryId/update',
+				element: <UpdateCountryPage />,
+			},
 			// {
 			// 	path: '/country/:countryId/delete',
 			// 	element: <DeleteCountryPage />,

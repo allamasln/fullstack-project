@@ -1,4 +1,4 @@
-import { httpService } from './httpService'
+import { httpService } from './http-service'
 
 import { pick } from 'lodash'
 

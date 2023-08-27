@@ -10,7 +10,7 @@ function useFetch(fn, params) {
 			.then(setItems)
 			.catch(setErrors)
 			.finally(() => setIsLoading(false))
-	}, [])
+	}, [params])
 
 	return [items, isLoading, errors]
 }
